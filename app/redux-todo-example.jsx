@@ -9,10 +9,26 @@ var stateDefault = {
 };
 
 var reducer = (state = stateDefault, action) => {
-  return state;
+
+  switch(action.type) {
+    case 'CHANGE_TO_DO':
+      return {
+        ...state,
+        searchToDo: action.searchToDo
+      };
+    default:
+      return state;
+  }
 };
 
 var store = redux.createStore(reducer);
 
 var currentState = store.getState();
 console.log('currentState', currentState);
+
+store.dispatch({
+  type: 'CHANGE_TO_DO',
+  searchToDo: 'work'
+})
+
+console.log('should be "work"', store.getState());
